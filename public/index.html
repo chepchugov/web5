@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/materialize.min.css">
+    <link rel="stylesheet" href="stylesheets/router.css">
+    <script src="javascripts/jquery-3.5.1.min.js"></script>
+    <script src="javascripts/materialize.min.js"></script>
+    <script src="javascripts/router.js"></script>
+    <script src="javascripts/session.js"></script>
+    <script src="javascripts/utils.js"></script>
+</head>
+<body>
+
+<!-- Navigation bar -->
+<nav>
+    <div class="container nav-wrapper">
+        <a href="javascript:void(0)" class="route-index brand-logo">Tasks</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="javascript:void(0)" class="route-index">Home</a></li>
+            <li><a href="javascript:void(0)" class="route-tasks">Tasks</a></li>
+            <li><a href="javascript:void(0)" class="route-login">Log in</a></li>
+            <li><a href="javascript:void(0)" class="route-signup">Sign up</a></li>
+            <li><a href="javascript:logout()" class="_route-logout">Log out</a></li>
+        </ul>
+    </div>
+</nav>
+<ul class="sidenav" id="mobile-demo">
+    <li><a href="javascript:void(0)" class="route-index">Home</a></li>
+    <li><a href="javascript:void(0)" class="route-tasks">Tasks</a></li>
+    <li><a href="javascript:void(0)" class="route-login">Log in</a></li>
+    <li><a href="javascript:void(0)" class="route-signup">Sign up</a></li>
+    <li><a href="javascript:logout()" class="_route-logout">Log out</a></li>
+</ul>
+
+<div class="view-index">
+    <div class="container">
+        <div class="row">
+            <div class="col m6 offset-m3 s12">
+                <h3 class="center">Home</h3>
+                <div class="section">
+                    <p class="flow-text center">Manage your tasks.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /tasks -->
+<div class="view-tasks">
+    <div class="container">
+        <div class="row">
+            <div class="col m6 offset-m3 s12">
+                <div class="section">
+                    <div class="row"><h5 class="center">Search tasks</h5></div>
+                    <div class="row">
+                        <div class="input-field">
+                            <input id="task-search-title" type="text" required>
+                            <label for="task-search-title">Title</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <select>
+                            <option value="" selected>Done?</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                        <label>Materialize Select</label>
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="row"><h5 class="center">Task list</h5></div>
+                    <div class="row">
+                        <ul id="task-collection" class="collection">
+                            <!-- ... -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="section">
+                    <form id="add-task-form">
+                        <div class="row"><h5 class="center">Create new task</h5></div>
+                        <div class="row">
+                            <div class="input-field">
+                                <input id="add-task-title" name="title" type="text" required>
+                                <label for="add-task-title">Title</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field">
+                                <textarea id="add-task-description" class="materialize-textarea" name="description"></textarea>
+                                <label for="add-task-description">Description (optional)</label>
+                            </div>
+                        </div>
+                        <div class="row center">
+                            <button type="submit" class="waves-effect waves-light btn">
+                                <i class="material-icons right">create</i>
+                                <span>Create</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /task -->
+<div class="view-task">
+    <div class="container">
+        <div class="row">
+            <div class="col m6 offset-m3 s12">
+                <div class="section">
+                    <div class="row"><h5 class="center">Task</h5></div>
+                    <form id="task-form">
+                        <div class="row">
+                            <div class="input-field">
+                                <input id="task-title" name="title" type="text" value="Title" required>
+                                <label for="task-title">Title</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field">
+                                <textarea id="task-description" class="materialize-textarea" name="description">Description</textarea>
+                                <label for="task-description">Description (optional)</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label>
+                                <input id="task-is-done" name="isDone" type="checkbox">
+                                <span>Done</span>
+                            </label>
+                        </div>
+                        <div class="row center">
+                            <button type="submit" class="waves-effect waves-light btn" value="update">
+                                <i class="material-icons right">send</i>
+                                <span>Update</span>
+                            </button>
+                            <button type="submit" class="waves-effect waves-light darken-1 red btn" value="delete">
+                                <i class="material-icons right">delete</i>
+                                <span>Delete</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /login -->
+<div class="view-login">
+    <div class="container">
+        <div class="row">
+            <div class="col m6 offset-m3 s12">
+                <h3 class="center">Log in</h3>
+                <div class="section">
+                    <form id="login-form">
+                        <div class="row">
+                            <div class="input-field">
+                                <input id="login-username" name="username" type="text" class="validate"
+                                       maxlength="64" required>
+                                <label for="login-username">Username</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field">
+                                <input id="login-password" name="password" type="password" class="validate"
+                                       maxlength="64" required>
+                                <label for="login-password">Password</label>
+                            </div>
+                        </div>
+                        <div class="row center">
+                            <button type="submit" class="waves-effect waves-light btn">
+                                <i class="material-icons right">login</i>
+                                <span>Log in</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /signup -->
+<div class="view-signup">
+    <div class="container">
+        <div class="row">
+            <div class="col m6 offset-m3 s12">
+                <h3 class="center">Sign up</h3>
+                <div class="section">
+                    <form id="signup-form">
+                        <div class="row">
+                            <div class="input-field">
+                                <input id="signup-username" name="username" type="text" class="validate" maxlength="64"
+                                       pattern="^[a-zA-Z0-9_]{4,64}$" required>
+                                <label for="signup-username">Username</label>
+                                <span class="helper-text">At least 4 letters, numbers, or underscores</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field">
+                                <input id="signup-password" name="password" type="password" class="validate"
+                                       maxlength="64" pattern=".{4,64}" required>
+                                <label for="signup-password">Password</label>
+                                <span class="helper-text">At least 8 characters</span>
+                            </div>
+                        </div>
+                        <div class="row center">
+                            <button type="submit" class="waves-effect waves-light btn">
+                                <i class="material-icons right">create</i>
+                                <span>Sign up</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /notfound -->
+<div class="view-notfound">
+    <div class="container">
+        <div class="row">
+            <h3 class="center">Not found</h3>
+            <div class="section">
+                <p class="flow-text center">Sorry, I can't find that.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="javascripts/script.js"></script>
+</body>
+</html>
